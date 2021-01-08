@@ -1,0 +1,28 @@
+<!-- (Source Code is GitHub)....(build tool is maven).....(Repository tool is Sonatype-Nexus)  --> 
+
+
+node ('master')
+ {
+  
+  def mavenHome = tool name: "maven3.6.3"
+  
+  stage("CheckOutCodeGit")
+  {
+  
+      git credentialsId: '55171d56-6302-4af2-b4a5-e3f0ab668789', url: 'https://github.com/flipkartproject-dev/maven-web-application.git'
+  }
+ 
+ stage("Build")
+ {
+      sh "${mavenHome}/bin/mvn clean package"
+ }
+
+ 
+ stage("UploadArtifactsintoNexus")
+ {
+     sh "${mavenHome}/bin/mvn deploy"
+ }
+ 
+ }
+ 
+ 
