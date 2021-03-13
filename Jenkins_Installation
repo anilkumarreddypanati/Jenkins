@@ -1,4 +1,5 @@
 #!bin/bash
+sudo su -
 cd /opt
 apt update -y
 apt install wget -y
